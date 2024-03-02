@@ -27,6 +27,13 @@ $ docker-compose up
 
 ## Resultados
 
+** Resultados Prévio teste beta prisma 26/02
+![Gráfico Resultados Gatling](./github/graficoresults.png)
+![Tabela resultados Gatling](./github/tabelaresukts.png)
+
+
+
+
 
 - Instagram: [@alcivan_lucas](https://www.instagram.com/alcivan_lucas/)
 - Github: [@Alcivan_lucas](https://github.com/AlcivanLucas)
