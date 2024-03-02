@@ -6,6 +6,9 @@
 - [**pgx**](https://github.com/jackc/pgx): PostgreSQL driver and toolkit
 - [**PostgreSQL**](https://www.postgresql.org): Banco de dados relacional
 - [**nginx**](https://nginx.org): Servidor HTTP e proxy reverso
+- [**Prisma ORM**](https://www.prisma.io/): Prisma ORM
+- [**Zod Validation**](https://zod.dev/): Zod for Validation
+  
 
 
 ## Alcivan Lucas
@@ -21,6 +24,9 @@ Só rodar o comando abaixo:
 ```sh
 $ docker-compose up
 ```
+
+## Resultados
+
 
 - Instagram: [@alcivan_lucas](https://www.instagram.com/alcivan_lucas/)
 - Github: [@Alcivan_lucas](https://github.com/AlcivanLucas)
