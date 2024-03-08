@@ -17,7 +17,6 @@
 --     realizada_em TIMESTAMP NOT NULL -- deve ser a data/hora da realização da transação.
 -- );
 
-
 -- CreateTable
 CREATE TABLE "clientes" (
     "id" SERIAL NOT NULL,
@@ -39,11 +38,20 @@ CREATE TABLE "transacoes" (
     CONSTRAINT "transacoes_pkey" PRIMARY KEY ("id")
 );
 
-INSERT INTO clientes (limite, saldo) VALUES (100000, 0);
-INSERT INTO clientes (limite, saldo) VALUES (80000, 0);
-INSERT INTO clientes (limite, saldo) VALUES (1000000, 0);
-INSERT INTO clientes (limite, saldo) VALUES (10000000, 0);
-INSERT INTO clientes (limite, saldo) VALUES (500000, 0);
+-- INSERT INTO clientes (limite, saldo) VALUES (100000, 0);
+-- INSERT INTO clientes (limite, saldo) VALUES (80000, 0);
+-- INSERT INTO clientes (limite, saldo) VALUES (1000000, 0);
+-- INSERT INTO clientes (limite, saldo) VALUES (10000000, 0);
+-- INSERT INTO clientes (limite, saldo) VALUES (500000, 0);
+
+INSERT INTO
+  "clientes" ("limite","saldo")
+VALUES
+  (100000, 0),
+  (80000, 0),
+  (1000000, 0),
+  (10000000, 0),
+  (500000, 0);
 
 -- DO $$
 -- BEGIN

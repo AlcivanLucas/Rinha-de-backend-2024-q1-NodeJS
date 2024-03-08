@@ -39,9 +39,9 @@ uroot :
 
 
 --------COMANDOS DB PostgreSQL--------------------
-docker exec -it alcivanlucas-db-1 psql -U admin -d rinha -c "SELECT * FROM clientes;"
-docker exec -it alcivanlucas-db-1 psql -U admin -d rinha -c "DELETE FROM transacoes WHERE cliente_id BETWEEN 1 AND 5;"
-docker exec -it alcivanlucas-db-1 psql -U admin -d rinha -c "UPDATE clientes SET saldo = 0  WHERE id BETWEEN 1 AND 5;"
+docker exec -it alcivanlucas-prisma-db-1 psql -U admin -d rinha -c "SELECT * FROM clientes;"
+docker exec -it alcivanlucas-prisma-db-1 psql -U admin -d rinha -c "DELETE FROM transacoes WHERE cliente_id BETWEEN 1 AND 5;"
+docker exec -it alcivanlucas-prisma-db-1 psql -U admin -d rinha -c "UPDATE clientes SET saldo = 0  WHERE id BETWEEN 1 AND 5;"
 docker exec -it postgres-conteiner /bin/bash
 -it : significa que vamos usar o terminal bash 
 docker exec -it alcivanlucas-db-1 psql -U admin -l : Isso irá listar todos os bancos de dados disponíveis
@@ -49,7 +49,7 @@ docker exec -it alcivanlucas-db-1 psql -U admin -d rinha : entra do conteiner do
 \dt : lista as tabelas do db rinha
 
 ------criando imagem docker--------
-docker build -t alcivanlucas/rinha-backend-2024-q1-nodejs:latest --no-cache .
+docker build --no-cache -t alcivanlucas/rinha-backend-2024-q1-nodejs:latest .
 docker push alcivanlucas/rinha-backend-2024-q1-nodejs:latest
 docker run -p 8081:8080 rinha-backend-2024-q1-nodejs:latest : Mapear a porta 8080 do container para a porta 8081 do host. 
 
@@ -72,6 +72,11 @@ Em vez de usar "localhost", você deve usar o nome do serviço do contêiner do 
  export GATLING_HOME=/home/galingds/Downloads/gatling_3.10.4
  export JAVA_HOME=/opt/java-sdk-21
  ./executar-teste-local.sh
+
+ --------------VARIAVEL AMBIENTE ----------------
+ nano ~/.bashrc
+ export JAVA_HOME=/usr/lib/jvm/jdk-20.0.2
+source ~/.bashrc
 
 docker system prune --volumes  
 WARNING! This will remove:

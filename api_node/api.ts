@@ -7,6 +7,7 @@ const app = express();
 require('dotenv').config();
 app.use(express.json());
 
+const port = 3000;
 
 app.get('/clientes/:id/extrato', async  (req: Request, res: Response) => {
     let statuscode = 200; // só para exibir o statuscode no console
@@ -155,8 +156,8 @@ app.post('/clientes/:id/transacoes', async  (req: Request, res: Response) => {
 
 
 try {
-    app.listen(8080,() =>{
-    console.log('Server is running on port 8080')
+    app.listen(port,() =>{
+        console.log(`Server is running at port ${port}`)
     }) 
 }
 catch (error) {
