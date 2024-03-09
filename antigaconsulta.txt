@@ -1,0 +1,29 @@
+            // const saldo = await prisma.cliente.findUnique({
+            //     where:{
+            //         id : clienteId
+            //     }
+            // })
+            // const transacoes = await prisma.transacao.findMany({
+            //     where: {
+            //         cliente_id: clienteId
+            //     },orderBy:{
+            //         realizada_em: 'desc'
+            //     }, take: 10 
+            // });
+
+            // // Removendo os atributos id e cliente_id das transacoes
+            // const ultimas_transacoes = transacoes.map((transacao) => {
+            //     const { id, cliente_id, ...ultimas_transacoes } = transacao;
+            //     return ultimas_transacoes;
+            // });
+
+            // res.status(200).json({
+            //     saldo:{
+            //         total: saldo?.saldo, // o operador ? é só pra não lançar erro caso o valor seja nulo
+            //         data_extrato: data_extrato,
+            //         limite: saldo?.limite
+            //     }, ultimas_transacoes
+            // });
+
+
+            

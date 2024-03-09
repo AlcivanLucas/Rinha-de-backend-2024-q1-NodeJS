@@ -9,6 +9,8 @@ app.use(express.json());
 
 const port = 3000;
 
+
+// 1 connections
 app.get('/clientes/:id/extrato', async  (req: Request, res: Response) => {
     let statuscode = 200; // só para exibir o statuscode no console
     try{
@@ -17,31 +19,38 @@ app.get('/clientes/:id/extrato', async  (req: Request, res: Response) => {
 
         // Verificando se o ID do cliente está dentro do intervalo esperado
         if (clienteId >= 1 && clienteId <= 5) {
-            const saldo = await prisma.cliente.findUnique({
-                where:{
-                    id : clienteId
-                }
-            })
-            const transacoes = await prisma.transacao.findMany({
+            // Realizando uma única consulta que inclui o cliente e suas transações relacionadas
+            const clienteComTransacoes = await prisma.cliente.findUnique({
                 where: {
-                    cliente_id: clienteId
-                },orderBy:{
-                    realizada_em: 'desc'
-                }, take: 10 
+                    id: clienteId
+                },
+                include: {
+                    transacoes: {
+                        orderBy: {
+                            realizada_em: 'desc'
+                        },
+                        take: 10
+                    }
+                }
             });
+            if (!clienteComTransacoes) {
+                res.status(404).send('Cliente não encontrado');
+                return;
+            }
 
             // Removendo os atributos id e cliente_id das transacoes
-            const ultimas_transacoes = transacoes.map((transacao) => {
+            const ultimas_transacoes = clienteComTransacoes.transacoes.map((transacao: { [x: string]: any; id: any; cliente_id: any; }) => {
                 const { id, cliente_id, ...ultimas_transacoes } = transacao;
                 return ultimas_transacoes;
             });
 
             res.status(200).json({
-                saldo:{
-                    total: saldo?.saldo, // o operador ? é só pra não lançar erro caso o valor seja nulo
+                saldo: {
+                    total: clienteComTransacoes.saldo,
                     data_extrato: data_extrato,
-                    limite: saldo?.limite
-                }, ultimas_transacoes
+                    limite: clienteComTransacoes.limite
+                },
+                ultimas_transacoes
             });
         } else {
             // Caso contrário, lançamos um erro com status 400 (Bad Request)
@@ -55,7 +64,7 @@ app.get('/clientes/:id/extrato', async  (req: Request, res: Response) => {
 })
 
 
-
+// 3 connections 
 // Rota para criar transações de um cliente específico
 app.post('/clientes/:id/transacoes', async  (req: Request, res: Response) => {
     let statuscode = 200; // só para exibir o statuscode no console
@@ -81,7 +90,7 @@ app.post('/clientes/:id/transacoes', async  (req: Request, res: Response) => {
             const { valor, tipo, descricao } = createClienteBody.parse(req.body);
 
             // Busca o cliente no banco de dados
-            const cliente = await prisma.cliente.findUnique({
+            let cliente = await prisma.cliente.findUnique({
                 where:{id: clienteId}
             })
 
@@ -108,8 +117,9 @@ app.post('/clientes/:id/transacoes', async  (req: Request, res: Response) => {
                     statuscode = 422;
                     return res.status(422).json({ error: 'Transação não permitida pois excede o limite' });
                 }
-                
-                await Promise.all([
+
+                await prisma.$transaction([
+                // await Promise.all([
                     // Cria a transação utilizando o Prisma Client
                     prisma.transacao.create({
                         data: {
@@ -125,9 +135,9 @@ app.post('/clientes/:id/transacoes', async  (req: Request, res: Response) => {
                     prisma.cliente.update({
                         where: { id: clienteId },
                         data: { saldo: newBalance }
-                    })                    
-                ])
-
+                    })     
+                ]);               
+                // ])
 
                 // Retorna o saldo e o limite do cliente
                 res.status(200).json( {limite: cliente.limite, saldo: newBalance});
