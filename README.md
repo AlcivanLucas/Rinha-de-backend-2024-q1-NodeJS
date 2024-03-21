@@ -27,13 +27,15 @@ $ docker-compose up
 
 ## Resultados
 
-** Resultados Prévio teste beta prisma 26/02
+#### Resultados Após otimização de Indexação e cache teste Alpha prisma 08/03
+![Gráfico Resultados Gatling](https://cdn.discordapp.com/attachments/759557750845472770/1215809413940510780/1709941932905.jpg?ex=65fe19c0&is=65eba4c0&hm=bd146414d5a9e227b673e043ab191bff9f5d9f0e14e0d80b13e5f97d21b95f0f&)
+
+#### Resultados Prévio teste beta prisma 26/02
 ![Gráfico Resultados Gatling](./github/graficoresults.png)
 ![Tabela resultados Gatling](./github/tabelaresukts.png)
 
 
-** Resultados Após otimização de Indexação e cache teste Alpha prisma 08/03
-![Gráfico Resultados Gatling](https://cdn.discordapp.com/attachments/759557750845472770/1215809413940510780/1709941932905.jpg?ex=65fe19c0&is=65eba4c0&hm=bd146414d5a9e227b673e043ab191bff9f5d9f0e14e0d80b13e5f97d21b95f0f&)
+
 
 - Instagram: [@alcivan_lucas](https://www.instagram.com/alcivan_lucas/)
 - Github: [@Alcivan_lucas](https://github.com/AlcivanLucas)
